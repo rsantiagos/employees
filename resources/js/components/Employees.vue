@@ -8,14 +8,33 @@
                 </button>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                {{employees}}
+            </div>
+        </div>
         <new-employee />
     </div>
 </template>
 
 <script>
     export default {
+        data() {
+            return {
+                employees: null
+            }
+        },
         mounted() {
-            console.log('Component mounted.')
-        }
+            this.getEmployees();
+        },
+        methods: {
+            async getEmployees(){
+                try {
+                    this.employees = (await axios.get('/employees')).data;
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+        },
     }
 </script>

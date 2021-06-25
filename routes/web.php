@@ -22,4 +22,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::apiResource('/employees', EmployeeController::class)->middleware('auth');
+Route::middleware(['auth'])->group(function () {
+    Route::post('/checkEmail', [EmployeeController::class, 'checkEmail']);
+    Route::apiResource('/employees', EmployeeController::class);
+});
