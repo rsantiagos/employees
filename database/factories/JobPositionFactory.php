@@ -24,6 +24,7 @@ class JobPositionFactory extends Factory
         return [
             'name' => $this->faker->jobTitle(),
             'importance' => $this->faker->randomDigitNotZero(),
+            'is_boss' => rand(0, 1),
             'category_id' => rand(1, 2)
         ];
     }
