@@ -1,16 +1,14 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Empleados</div>
-
-                    <div class="card-body">
-                        Listar a los Empleados
-                    </div>
-                </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal">
+                    Nuevo empleado
+                </button>
             </div>
         </div>
+        <new-employee />
     </div>
 </template>
 

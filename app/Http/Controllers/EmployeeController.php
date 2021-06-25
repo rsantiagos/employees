@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class EmployeeController extends Controller
 {
@@ -35,7 +36,26 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+
+        $validator = Validator::make($input, [
+            'name' => 'required',
+            'last_name' => 'required',
+            'dni' => 'required',
+            'birthdate' => 'required',
+            'address' => 'required',
+            'picture' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'entity_name' => 'required',
+            'entity_identifier' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Error de validación', $validator->errors());
+        }
+
+        return Employee::create($input);
     }
 
     /**
