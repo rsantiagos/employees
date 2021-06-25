@@ -5,7 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use App\Models\User;
-
+use Database\Seeders\CategorySeeder;
+use App\Models\JobPosition;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -24,5 +25,9 @@ class DatabaseSeeder extends Seeder
         $user->password = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'; // password
         $user->remember_token = Str::random(10);
         $user->save();
+
+        $this->call(CategorySeeder::class);
+
+        JobPosition::factory(10)->create();
     }
 }
