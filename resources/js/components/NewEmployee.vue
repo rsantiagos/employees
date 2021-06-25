@@ -89,10 +89,9 @@
                                 <label class="input-group-text" for="inputGroupSelect01">Puesto Laboral</label>
                             </div>
                             <select v-model="form.jobPosition_id" class="custom-select" id="inputGroupSelect01">
-                                <option selected>Choose...</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <option v-for="jb in jobPositions" :key="jb.id" :value="jb.id">
+                                    {{ jb.name }}
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -142,8 +141,12 @@ export default {
                 jobPosition_id: null,
                 entity_name: null,
                 entity_identifier: null
-            }
+            },
+            jobPositions:null
         }
+    },
+    mounted() {
+        this.getJobPositions();
     },
     methods: {
         async checkEmail(){
@@ -153,6 +156,13 @@ export default {
                     last_name: this.form.last_name
                 }
                 this.form.email = (await axios.post('/checkEmail', params)).data.email;
+            } catch (error) {
+                console.error(error);
+            }
+        },
+        async getJobPositions(){
+            try {
+                this.jobPositions = (await axios.get('/job_positions')).data;
             } catch (error) {
                 console.error(error);
             }

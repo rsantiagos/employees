@@ -2074,7 +2074,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2090,8 +2089,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         jobPosition_id: null,
         entity_name: null,
         entity_identifier: null
-      }
+      },
+      jobPositions: null
     };
+  },
+  mounted: function mounted() {
+    this.getJobPositions();
   },
   methods: {
     checkEmail: function checkEmail() {
@@ -2127,6 +2130,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee, null, [[0, 7]]);
+      }))();
+    },
+    getJobPositions: function getJobPositions() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return axios.get('/job_positions');
+
+              case 3:
+                _this2.jobPositions = _context2.sent.data;
+                _context2.next = 9;
+                break;
+
+              case 6:
+                _context2.prev = 6;
+                _context2.t0 = _context2["catch"](0);
+                console.error(_context2.t0);
+
+              case 9:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 6]]);
       }))();
     }
   }
@@ -38876,23 +38909,20 @@ var render = function() {
                           }
                         }
                       },
-                      [
-                        _c("option", { attrs: { selected: "" } }, [
-                          _vm._v("Choose...")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "1" } }, [
-                          _vm._v("One")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "2" } }, [
-                          _vm._v("Two")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "3" } }, [
-                          _vm._v("Three")
-                        ])
-                      ]
+                      _vm._l(_vm.jobPositions, function(jb) {
+                        return _c(
+                          "option",
+                          { key: jb.id, domProps: { value: jb.id } },
+                          [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(jb.name) +
+                                "\n                            "
+                            )
+                          ]
+                        )
+                      }),
+                      0
                     )
                   ])
                 ]),

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\JobPositionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +24,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/job_positions', [JobPositionController::class, 'index']);
     Route::post('/checkEmail', [EmployeeController::class, 'checkEmail']);
     Route::apiResource('/employees', EmployeeController::class);
 });
