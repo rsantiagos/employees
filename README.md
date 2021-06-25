@@ -54,3 +54,9 @@ php artisan migrate:refresh --seed
 ```
 php artisan serve
 ```
+
+9.- Credenciales para loguearse en el sistema
+```
+user: admin@test.com
+pass: password
+```
