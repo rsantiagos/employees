@@ -38647,6 +38647,15 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("td", [
+                      _c("img", {
+                        staticClass: "img-fluid rounded-circle",
+                        attrs: {
+                          src: e.picture,
+                          height: "35",
+                          width: "35",
+                          alt: e.name
+                        }
+                      }),
                       _vm._v(" " + _vm._s(e.name + " " + e.last_name) + " ")
                     ]),
                     _vm._v(" "),

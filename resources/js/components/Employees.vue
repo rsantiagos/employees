@@ -23,7 +23,7 @@
                         <tbody>
                             <tr v-for="e in employees" :key="e.id">
                                 <th scope="row">{{ e.id }}</th>
-                                <td> {{ e.name + ' ' + e.last_name }} </td>
+                                <td> <img :src="e.picture" class="img-fluid rounded-circle" height="35" width="35" :alt="e.name"> {{ e.name + ' ' + e.last_name }} </td>
                                 <td> {{ e.dni }} </td>
                                 <td> {{ e.user.email }} </td>
                             </tr>
