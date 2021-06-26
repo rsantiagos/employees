@@ -17,7 +17,11 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        return Employee::all();
+        $employees = Employee::all();
+        $employees->map(function ($e) {
+           $e->picture = env('APP_URL') . $e->picture;
+        });
+        return $employees;
     }
 
     /**
@@ -41,6 +45,7 @@ class EmployeeController extends Controller
         $input = $request->all();
 
         $validator = Validator::make($input, [
+            'photo'   => ['image', 'max:20000|dimensions:max_width=1000,max_height=1000'],
             'name' => 'required',
             'last_name' => 'required',
             'dni' => 'required',
@@ -57,6 +62,14 @@ class EmployeeController extends Controller
         if ($validator->fails()) {
             return $this->sendError('Error de validación', $validator->errors());
         }
+
+        $file = $request->file('photo');
+        $name =  uniqid() . '.' . $file->extension();
+        $urlImage = '/images/avatars/';
+        $request->photo->move(public_path($urlImage), $name);
+        $input['picture'] = $urlImage.$name;
+
+
         $input['password'] = Hash::make($input['password']);
         $user = User::create($input);
         $e = new Employee();
@@ -68,6 +81,7 @@ class EmployeeController extends Controller
         $e->picture = $input['picture'];
         $e->user_id = $user['id'];
         $e->save();
+        $e->picture = env('APP_URL') . $e->picture;
         return $e;
     }
 
@@ -129,12 +143,12 @@ class EmployeeController extends Controller
             return $this->sendError('Error de validación', $validator->errors());
         }
 
-        $last_name = str_split($input['last_name']);
-        $email = $input['name'].$input['last_name'].'@test.com.mx';
+        $last_name = str_split(str_replace(' ', '', $input['last_name']));
+        $email = str_replace(' ', '', $input['name']).$input['last_name'].'@test.com.mx';
         $prefix = '';
         foreach ($last_name as $value) {
             $prefix .= $value;
-            $email = $input['name'].$prefix.'@test.com';
+            $email = str_replace(' ', '', $input['name']).$prefix.'@test.com';
             $verify = User::where('email', '=', $email)->first();
             if (!$verify) {
                 break;

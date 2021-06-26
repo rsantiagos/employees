@@ -38858,7 +38858,8 @@ var render = function() {
                       attrs: {
                         type: "file",
                         "aria-label": "photo",
-                        "aria-describedby": "inputGroup-sizing-photo"
+                        "aria-describedby": "inputGroup-sizing-photo",
+                        accept: "image/*"
                       },
                       on: {
                         change: function($event) {

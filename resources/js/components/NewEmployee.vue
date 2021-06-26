@@ -60,7 +60,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-photo">Foto</span>
                             </div>
-                            <input type="file" ref="picture" @change="handleFileObject()" class="form-control" aria-label="photo" aria-describedby="inputGroup-sizing-photo">
+                            <input type="file" ref="picture" @change="handleFileObject()" class="form-control" aria-label="photo" aria-describedby="inputGroup-sizing-photo" accept="image/*" >
                         </div>
                     </div>
                 </div>
