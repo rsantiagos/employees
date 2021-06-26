@@ -180,6 +180,10 @@ export default {
                     'Content-Type': 'multipart/form-data'
                     }
                 });
+                this.$parent.getEmployees();
+                for ( var item in this.form ) {
+                    this.form[item] = '';
+                }
                 $('#exampleModal').modal('hide');
             } catch (error) {
                 console.error(error);

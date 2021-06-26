@@ -1858,6 +1858,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _NewEmployee_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewEmployee.vue */ "./resources/js/components/NewEmployee.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -1883,7 +1884,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    NewEmployee: _NewEmployee_vue__WEBPACK_IMPORTED_MODULE_1__.default
+  },
   data: function data() {
     return {
       employees: null
@@ -2167,7 +2172,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var formData, key;
+        var formData, key, item;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
@@ -2188,21 +2193,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
 
               case 6:
+                _this3.$parent.getEmployees();
+
+                for (item in _this3.form) {
+                  _this3.form[item] = '';
+                }
+
                 $('#exampleModal').modal('hide');
-                _context3.next = 12;
+                _context3.next = 14;
                 break;
 
-              case 9:
-                _context3.prev = 9;
+              case 11:
+                _context3.prev = 11;
                 _context3.t0 = _context3["catch"](0);
                 console.error(_context3.t0);
 
-              case 12:
+              case 14:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[0, 9]]);
+        }, _callee3, null, [[0, 11]]);
       }))();
     },
     handleFileObject: function handleFileObject() {
@@ -2239,7 +2250,6 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('employees', __webpack_require__(/*! ./components/Employees.vue */ "./resources/js/components/Employees.vue").default);
-Vue.component('NewEmployee', __webpack_require__(/*! ./components/NewEmployee.vue */ "./resources/js/components/NewEmployee.vue").default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -38609,7 +38619,7 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("new-employee")
+      _c("NewEmployee")
     ],
     1
   )

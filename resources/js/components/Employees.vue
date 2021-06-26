@@ -13,12 +13,14 @@
                 {{employees}}
             </div>
         </div>
-        <new-employee />
+        <NewEmployee />
     </div>
 </template>
 
 <script>
+import NewEmployee from './NewEmployee.vue';
     export default {
+        components: { NewEmployee },
         data() {
             return {
                 employees: null
