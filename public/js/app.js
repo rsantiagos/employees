@@ -1884,6 +1884,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -38615,7 +38634,31 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-md-12" }, [
-          _vm._v("\n            " + _vm._s(_vm.employees) + "\n        ")
+          _c("div", { staticClass: "table-responsive-md" }, [
+            _c("table", { staticClass: "table table-hover" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.employees, function(e) {
+                  return _c("tr", { key: e.id }, [
+                    _c("th", { attrs: { scope: "row" } }, [
+                      _vm._v(_vm._s(e.id))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(" " + _vm._s(e.name + " " + e.last_name) + " ")
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(" " + _vm._s(e.dni) + " ")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(" " + _vm._s(e.user.email) + " ")])
+                  ])
+                }),
+                0
+              )
+            ])
+          ])
         ])
       ]),
       _vm._v(" "),
@@ -38643,6 +38686,22 @@ var staticRenderFns = [
           },
           [_vm._v("\n                Nuevo empleado\n            ")]
         )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("DNI")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("email")])
       ])
     ])
   }

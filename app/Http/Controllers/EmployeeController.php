@@ -20,6 +20,7 @@ class EmployeeController extends Controller
         $employees = Employee::all();
         $employees->map(function ($e) {
            $e->picture = env('APP_URL') . $e->picture;
+           $e->user;
         });
         return $employees;
     }
@@ -156,7 +157,7 @@ class EmployeeController extends Controller
         }
 
         $response = [
-            'email' => $email
+            'email' => strtolower($email)
         ];
         return response()->json($response, 200);
     }

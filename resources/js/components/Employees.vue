@@ -10,7 +10,26 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                {{employees}}
+                <div class="table-responsive-md">
+                    <table class="table table-hover">
+                       <thead>
+                            <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">DNI</th>
+                            <th scope="col">email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="e in employees" :key="e.id">
+                                <th scope="row">{{ e.id }}</th>
+                                <td> {{ e.name + ' ' + e.last_name }} </td>
+                                <td> {{ e.dni }} </td>
+                                <td> {{ e.user.email }} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <NewEmployee />
