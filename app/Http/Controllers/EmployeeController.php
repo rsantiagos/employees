@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class EmployeeController extends Controller
@@ -56,8 +57,18 @@ class EmployeeController extends Controller
         if ($validator->fails()) {
             return $this->sendError('Error de validación', $validator->errors());
         }
-
-        return Employee::create($input);
+        $input['password'] = Hash::make($input['password']);
+        $user = User::create($input);
+        $e = new Employee();
+        $e->name = $input['name'];
+        $e->last_name = $input['last_name'];
+        $e->dni = $input['dni'];
+        $e->birthdate = $input['birthdate'];
+        $e->address = $input['address'];
+        $e->picture = $input['picture'];
+        $e->user_id = $user['id'];
+        $e->save();
+        return $e;
     }
 
     /**
@@ -120,8 +131,10 @@ class EmployeeController extends Controller
 
         $last_name = str_split($input['last_name']);
         $email = $input['name'].$input['last_name'].'@test.com.mx';
+        $prefix = '';
         foreach ($last_name as $value) {
-            $email = $input['name'].$value.'@test.com';
+            $prefix .= $value;
+            $email = $input['name'].$prefix.'@test.com';
             $verify = User::where('email', '=', $email)->first();
             if (!$verify) {
                 break;

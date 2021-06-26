@@ -60,7 +60,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-photo">Foto</span>
                             </div>
-                            <input type="file" class="form-control" aria-label="photo" aria-describedby="inputGroup-sizing-photo">
+                            <input type="file" ref="picture" @change="handleFileObject()" class="form-control" aria-label="photo" aria-describedby="inputGroup-sizing-photo">
                         </div>
                     </div>
                 </div>
@@ -118,7 +118,7 @@
             </div>
             <div class="modal-footer">
                 <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button> -->
-                <button type="button" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-primary" @click="createEmployee()" >Guardar</button>
             </div>
             </div>
         </div>
@@ -135,13 +135,14 @@ export default {
                 dni: null,
                 birthdate: null,
                 address: null,
-                picture: null,
                 email: null,
                 password: null,
+                picture: null,
                 jobPosition_id: null,
                 entity_name: null,
                 entity_identifier: null
             },
+            photo: null,
             jobPositions:null
         }
     },
@@ -166,7 +167,28 @@ export default {
             } catch (error) {
                 console.error(error);
             }
-        }
+        },
+        async createEmployee(){
+            try {
+                let formData = new FormData()
+                formData.append('photo', this.photo)
+                for ( var key in this.form ) {
+                    formData.append(key, this.form[key]);
+                }
+                await axios.post('/employees', formData, {
+                    headers: {
+                    'Content-Type': 'multipart/form-data'
+                    }
+                });
+                $('#exampleModal').modal('hide');
+            } catch (error) {
+                console.error(error);
+            }
+        },
+        handleFileObject() {
+        this.photo = this.$refs.picture.files[0]
+        this.form.picture = this.photo.name
+      }
     },
 
 }

@@ -2083,13 +2083,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         dni: null,
         birthdate: null,
         address: null,
-        picture: null,
         email: null,
         password: null,
+        picture: null,
         jobPosition_id: null,
         entity_name: null,
         entity_identifier: null
       },
+      photo: null,
       jobPositions: null
     };
   },
@@ -2161,6 +2162,52 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee2, null, [[0, 6]]);
       }))();
+    },
+    createEmployee: function createEmployee() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var formData, key;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                formData = new FormData();
+                formData.append('photo', _this3.photo);
+
+                for (key in _this3.form) {
+                  formData.append(key, _this3.form[key]);
+                }
+
+                _context3.next = 6;
+                return axios.post('/employees', formData, {
+                  headers: {
+                    'Content-Type': 'multipart/form-data'
+                  }
+                });
+
+              case 6:
+                $('#exampleModal').modal('hide');
+                _context3.next = 12;
+                break;
+
+              case 9:
+                _context3.prev = 9;
+                _context3.t0 = _context3["catch"](0);
+                console.error(_context3.t0);
+
+              case 12:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, null, [[0, 9]]);
+      }))();
+    },
+    handleFileObject: function handleFileObject() {
+      this.photo = this.$refs.picture.files[0];
+      this.form.picture = this.photo.name;
     }
   }
 });
@@ -38801,7 +38848,26 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(6)
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "input-group mb-3" }, [
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _c("input", {
+                      ref: "picture",
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "file",
+                        "aria-label": "photo",
+                        "aria-describedby": "inputGroup-sizing-photo"
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.handleFileObject()
+                        }
+                      }
+                    })
+                  ])
+                ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
@@ -39000,7 +39066,21 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(12)
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.createEmployee()
+                    }
+                  }
+                },
+                [_vm._v("Guardar")]
+              )
+            ])
           ])
         ]
       )
@@ -39112,28 +39192,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-6" }, [
-      _c("div", { staticClass: "input-group mb-3" }, [
-        _c("div", { staticClass: "input-group-prepend" }, [
-          _c(
-            "span",
-            {
-              staticClass: "input-group-text",
-              attrs: { id: "inputGroup-sizing-photo" }
-            },
-            [_vm._v("Foto")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "file",
-            "aria-label": "photo",
-            "aria-describedby": "inputGroup-sizing-photo"
-          }
-        })
-      ])
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c(
+        "span",
+        {
+          staticClass: "input-group-text",
+          attrs: { id: "inputGroup-sizing-photo" }
+        },
+        [_vm._v("Foto")]
+      )
     ])
   },
   function() {
@@ -39208,18 +39275,6 @@ var staticRenderFns = [
           attrs: { id: "inputGroup-sizing-entity_identifier" }
         },
         [_vm._v("Identificador entidad")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "button" } },
-        [_vm._v("Guardar")]
       )
     ])
   }
