@@ -17,7 +17,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::all();
+        $per_page = \Request::get('per_page') ?: 5;
+        $employees = Employee::paginate($per_page);
         $employees->map(function ($e) {
            $e->picture = env('APP_URL') . $e->picture;
            $e->user;
